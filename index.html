@@ -1,497 +1,150 @@
-<!-- ROTE PUNKTE:-----------------
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10-Page Narrative Portfolio</title>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
+    <title>Eternal Timepiece - Luxury Watch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #000; --text: #fff; --accent: #ff3e00; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Helvetica', sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        /* Smooth Snap Container */
-        .main-container {
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
+        body {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            background-color: #000;
+            overflow-x: hidden;
             scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
         }
 
         section {
             height: 100vh;
-            width: 100vw;
-            scroll-snap-align: start;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            padding: 5vw;
-            box-sizing: border-box;
-        }
-
-        /* Side Navigation Dots */
-        .nav-dots {
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-        }
-        .dot { width: 8px; height: 8px; background: rgba(255,255,255,0.3); border-radius: 50%; transition: 0.3s; }
-        .dot.active { background: var(--accent); transform: scale(1.5); }
-
-        /* Typography & Layouts */
-        h2 { font-size: 10vw; text-transform: uppercase; line-height: 0.8; margin: 0; z-index: 2; }
-        .reveal { opacity: 0; transform: translateY(50px); }
-        
-        .img-box {
-            position: absolute;
-            width: 30vw;
-            height: 40vh;
-            background: #111;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            scroll-snap-align: start;
+            position: relative;
             overflow: hidden;
-            z-index: 1;
         }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
 
-        /* Specific positions for visual variety */
-        .pos-right { right: 10%; top: 20%; }
-        .pos-left { left: 10%; bottom: 20%; }
-        .pos-center { left: 50%; top: 50%; transform: translate(-50%, -50%); }
-    </style>
-</head>
-<body>
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transition: transform 0.5s ease-out;
+        }
 
-    <div class="nav-dots" id="dot-container"></div>
+        /* Parallax effect */
+        section:hover .background {
+            transform: scale(1.05);
+        }
 
-    <div class="main-container" id="scroller">
-        <section id="s1"><h2>Anton<br>& Irene</h2></section>
-        
-        <section id="s2">
-            <div class="img-box pos-right"><img src="https://picsum.photos/800/1000?v=2"></div>
-            <h2 class="reveal">Work<br>Ethic</h2>
-        </section>
+        h1, h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
 
-        <section id="s3">
-            <div class="img-box pos-left"><img src="https://picsum.photos/800/1000?v=3"></div>
-            <h2 class="reveal" style="text-align: right;">Digital<br>Soul</h2>
-        </section>
+        p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease 0.3s;
+        }
 
-        <section id="s4">
-            <h2 class="reveal">Project<br>Alpha</h2>
-            <div class="img-box pos-center" style="width: 80vw; height: 30vh; z-index: 0; opacity: 0.3;">
-                <img src="https://picsum.photos/1200/600?v=4">
-            </div>
-        </section>
+        .cta {
+            background-color: rgba(255, 215, 0, 0.8); /* Gold */
+            color: #000;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease 0.6s, background-color 0.3s;
+        }
 
-        <section id="s5">
-            <h2 class="reveal" style="color: var(--accent);">Strategy</h2>
-        </section>
+        .cta:hover {
+            background-color: rgba(255, 215, 0, 1);
+        }
 
-        <section id="s6">
-            <div class="img-box pos-right" style="width: 50vw;"><img src="https://picsum.photos/1000/1000?v=6"></div>
-            <h2 class="reveal">Identity</h2>
-        </section>
+        /* Animation trigger */
+        section.visible h1,
+        section.visible p,
+        section.visible .cta {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-        <section id="s7">
-            <h2 class="reveal">System<br>Design</h2>
-        </section>
-
-        <section id="s8">
-            <div class="img-box pos-left"><img src="https://picsum.photos/800/1000?v=8"></div>
-            <h2 class="reveal">Motion</h2>
-        </section>
-
-        <section id="s9">
-            <h2 class="reveal">Future<br>Tools</h2>
-        </section>
-
-        <section id="s10">
-            <h2 class="reveal">Contact<br>Us</h2>
-            <p style="position: absolute; bottom: 10%; font-family: monospace;">info@example.com</p>
-        </section>
-    </div>
-
-    <script>
-        window.addEventListener('load', function() {
-            gsap.registerPlugin(ScrollTrigger);
-            const sections = gsap.utils.toArray("section");
-            const dots = [];
-
-            // Generate Nav Dots
-            const dotContainer = document.getElementById('dot-container');
-            sections.forEach((_, i) => {
-                const dot = document.createElement('div');
-                dot.className = 'dot';
-                dotContainer.appendChild(dot);
-                dots.push(dot);
-            });
-
-            // Core Animation Loop
-            sections.forEach((section, i) => {
-                
-                // Animation for text reveal
-                const title = section.querySelector('h2');
-                gsap.to(title, {
-                    scrollTrigger: {
-                        trigger: section,
-                        scroller: "#scroller",
-                        start: "top center",
-                        toggleActions: "play none none reverse"
-                    },
-                    opacity: 1,
-                    y: 0,
-                    duration: 1.2,
-                    ease: "power4.out"
-                });
-
-                // Animation for image parallax
-                const img = section.querySelector('.img-box');
-                if(img) {
-                    gsap.from(img, {
-                        scrollTrigger: {
-                            trigger: section,
-                            scroller: "#scroller",
-                            start: "top bottom",
-                            end: "bottom top",
-                            scrub: 1
-                        },
-                        y: 100,
-                        rotate: 5
-                    });
-                }
-
-                // Update Active Dot
-                ScrollTrigger.create({
-                    trigger: section,
-                    scroller: "#scroller",
-                    start: "top center",
-                    end: "bottom center",
-                    onEnter: () => updateDots(i),
-                    onEnterBack: () => updateDots(i)
-                });
-            });
-
-            function updateDots(index) {
-                dots.forEach(d => d.classList.remove('active'));
-                dots[index].classList.add('active');
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            h1, h2 {
+                font-size: 2.5rem;
             }
-        });
-    </script>
-</body>
-</html>
--->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--UPDATE ROTEPUNKTE:
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Studio - Inspired by Anton & Irene</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 30px;
-      z-index: 100;
-      mix-blend-mode: difference;
-      color: #fff;
-    }
-    header h1 {
-      font-size: 24px;
-      font-weight: 300;
-    }
-    .section {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .project-img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.1);
-      opacity: 0.8;
-      transition: opacity 0.5s;
-    }
-    .project-overlay {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 40px;
-      max-width: 800px;
-    }
-    .project-overlay h2 {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
-    .project-overlay h2 span {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(50px) rotate(-5deg);
-    }
-    .project-overlay p {
-      font-size: 20px;
-      opacity: 0;
-      transform: translateY(50px);
-    }
-    .section:nth-child(odd) .project-img {
-      mix-blend-mode: screen; /* For overlapping fade effects */
-    }
-    footer {
-      padding: 100px 40px;
-      text-align: center;
-      font-size: 18px;
-    }
-    @media (max-width: 768px) {
-      .project-overlay h2 { font-size: 36px; }
-      .project-overlay p { font-size: 18px; }
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>My Studio</h1>
-  </header>
-
-  
-  <section class="section">
-    <img src="https://via.placeholder.com/1920x1080/222/fff?text=Project+1" alt="Project 1" class="project-img">
-    <div class="project-overlay">
-      <h2><span>P</span><span>r</span><span>o</span><span>j</span><span>e</span><span>c</span><span>t</span> <span>O</span><span>n</span><span>e</span></h2>
-      <p>A bold exploration of data visualization highlighting important social issues.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <img src="https://via.placeholder.com/1920x1080/333/fff?text=Project+2" alt="Project 2" class="project-img">
-    <div class="project-overlay">
-      <h2><span>P</span><span>r</span><span>o</span><span>j</span><span>e</span><span>c</span><span>t</span> <span>T</span><span>w</span><span>o</span></h2>
-      <p>Digital redesign for a world-class cultural institution.</p>
-    </div>
-  </section>
-
-
-  <section class="section">
-    <img src="https://via.placeholder.com/1920x1080/444/fff?text=Project+3" alt="Project 3" class="project-img">
-    <div class="project-overlay">
-      <h2><span>P</span><span>r</span><span>o</span><span>j</span><span>e</span><span>c</span><span>t</span> <span>T</span><span>h</span><span>r</span><span>e</span><span>e</span></h2>
-      <p>Building scalable design systems for global platforms.</p>
-    </div>
-  </section>
-
-
-
-
-
-
-
-  <footer>
-    <p>Inspired by Anton & Irene © 2026</p>
-    <p>Contact: hello@yourstudio.com</p>
-  </footer>
-
-  <script>
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Parallax scale and opacity fade on images for gentle overlap
-    document.querySelectorAll('.section').forEach(section => {
-      const img = section.querySelector('.project-img');
-      gsap.to(img, {
-        scale: 1,
-        opacity: 1,
-        ease: "power1.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true
+            p {
+                font-size: 1rem;
+            }
+            section {
+                padding: 10px;
+            }
         }
-      });
-    });
-
-    // Staggered letter-by-letter animation for h2, plus p slide-up
-    document.querySelectorAll('.project-overlay').forEach(overlay => {
-      const letters = overlay.querySelectorAll('h2 span');
-      const p = overlay.querySelector('p');
-
-      gsap.to(letters, {
-        opacity: 1,
-        y: 0,
-        rotation: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        stagger: 0.05, // Gradual reveal for delight
-        scrollTrigger: {
-          trigger: overlay,
-          start: "top 70%",
-          toggleActions: "play none none reverse"
-        }
-      });
-
-      gsap.to(p, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.out",
-        delay: 0.3, // After letters for sequential life-bringing
-        scrollTrigger: {
-          trigger: overlay,
-          start: "top 70%",
-          toggleActions: "play none none reverse"
-        }
-      });
-    });
-  </script>
-</body>
-</html>
--->
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Portfolio Fix</title>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <style>
-        :root { --bg: #050505; --text: #ffffff; --accent: #00ffcc; }
-        body { 
-            margin: 0; background: var(--bg); color: var(--text); 
-            font-family: sans-serif; overflow-x: hidden; 
-        }
-        section { min-height: 100vh; padding: 40px 20px; display: flex; flex-direction: column; justify-content: center; }
-        .reveal { opacity: 0; transform: translateY(30px); }
-        .img-container { 
-            width: 100%; aspect-ratio: 3/4; background: #111; 
-            margin: 20px 0; overflow: hidden; border-radius: 8px;
-        }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
-        h1 { font-size: 12vw; text-transform: uppercase; margin: 0; }
-        h2 { font-size: 3rem; margin: 0; }
-        p { font-size: 1.2rem; color: #888; }
     </style>
 </head>
 <body>
-
-    <section>
-        <h1 class="reveal">Anton<br>& Irene</h1>
-        <p class="reveal">Scroll down to see the magic.</p>
+    <section id="hero">
+        <div class="background" style="background-image: url('https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2025/11/14104018/rolex-cover-1.jpg');"></div>
+        <h1>Eternal Timepiece</h1>
+        <p>Discover the pinnacle of luxury and precision engineering in our timeless watches.</p>
+        <a href="#features" class="cta">Explore More</a>
     </section>
 
-    <section id="p1">
-        <div class="img-container">
-            <img src="https://picsum.photos/800/1200?random=1" class="parallax-img">
-        </div>
-        <h2 class="reveal">Project One</h2>
-        <p class="reveal">Smooth motion for mobile devices.</p>
+    <section id="features">
+        <div class="background" style="background-image: url('https://cdn.prod.website-files.com/603f5d1df4ee236b69719ff2/6744b38c112bca126f2ad5c4_ar_watch_try-on.webp');"></div>
+        <h2>Unmatched Craftsmanship</h2>
+        <p>Each watch is handcrafted with the finest materials, ensuring elegance and durability that inspires confidence.</p>
+        <a href="#about" class="cta">Learn About Our Process</a>
     </section>
 
-    <section id="p2">
-        <div class="img-container">
-            <img src="https://picsum.photos/800/1200?random=2" class="parallax-img">
-        </div>
-        <h2 class="reveal">Project Two</h2>
-        <p class="reveal">Built with GSAP ScrollTrigger.</p>
+    <section id="about">
+        <div class="background" style="background-image: url('https://tdf-asia.com/wp-content/uploads/2020/07/Feature-Images_TDF_Visual-Merchandising-Storytelling-Manufacturing-Specialist_Rolex_Luxury-Watch-Shop-Window-Displays.jpg');"></div>
+        <h2>Our Legacy</h2>
+        <p>Rooted in tradition yet inspired by the future, Eternal Timepiece redefines luxury for the modern connoisseur.</p>
+        <a href="#hero" class="cta">Back to Top</a>
     </section>
-
-    <div style="height: 50vh;"></div>
 
     <script>
-        // THIS IS THE FIX: Wait for the window to load completely
-        window.addEventListener('load', function() {
-            
-            // Register the plugin
-            gsap.registerPlugin(ScrollTrigger);
+        // Simple scroll animation trigger using Intersection Observer
+        const sections = document.querySelectorAll('section');
 
-            // 1. Simple Fade-in for text
-            gsap.utils.toArray(".reveal").forEach((el) => {
-                gsap.to(el, {
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 85%", // Starts when the top of the element hits 85% of viewport height
-                        toggleActions: "play none none reverse",
-                        // markers: true // UNCOMMENT THIS LINE TO SEE TRIGGER POINTS
-                    },
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: "power2.out"
-                });
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
             });
+        }, { threshold: 0.5 });
 
-            // 2. Parallax effect for images
-            gsap.utils.toArray(".parallax-img").forEach((img) => {
-                gsap.to(img, {
-                    scrollTrigger: {
-                        trigger: img.parentElement,
-                        start: "top bottom",
-                        end: "bottom top",
-                        scrub: true
-                    },
-                    y: -50, // Moves the image upward as you scroll
-                    scale: 1.1,
-                    ease: "none"
-                });
-            });
-
-            // Refresh ScrollTrigger to ensure all positions are calculated correctly
-            ScrollTrigger.refresh();
+        sections.forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>
