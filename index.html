@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eternal Timepiece - Luxury Watch</title>
+    <title>Eternal Timepiece - Luxury Watches</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <style>
         * {
@@ -46,7 +46,6 @@
             transition: transform 0.5s ease-out;
         }
 
-        /* Parallax effect */
         section:hover .background {
             transform: scale(1.05);
         }
@@ -79,18 +78,99 @@
             opacity: 0;
             transform: translateY(50px);
             transition: opacity 1s ease, transform 1s ease 0.6s, background-color 0.3s;
+            cursor: pointer;
         }
 
         .cta:hover {
             background-color: rgba(255, 215, 0, 1);
         }
 
-        /* Animation trigger */
-        section.visible h1,
+        section.visible h1, section.visible h2,
         section.visible p,
         section.visible .cta {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        /* Carousel for Collections */
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            width: 100%;
+            height: 80%;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .product-card {
+            flex: 0 0 80%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            scroll-snap-align: center;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        /* Product Details */
+        .product-detail {
+            max-width: 600px;
+        }
+
+        .add-to-cart {
+            margin-top: 20px;
+        }
+
+        /* Cart */
+        #cart-items {
+            list-style: none;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        #cart-items li {
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #total {
+            font-size: 1.5rem;
+            margin-top: 20px;
         }
 
         /* Mobile optimizations */
@@ -104,35 +184,149 @@
             section {
                 padding: 10px;
             }
+            .carousel {
+                flex: 0 0 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="#hero">Home</a>
+        <a href="#collections">Collections</a>
+        <a href="#about">About</a>
+        <a href="#craftsmanship">Craft</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+        <a href="#cart">Cart</a>
+        <a href="#checkout">Checkout</a>
+    </nav>
+
     <section id="hero">
-        <div class="background" style="background-image: url('https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2025/11/14104018/rolex-cover-1.jpg');"></div>
+        <div class="background" style="background-image: url('https://globalboutique.com/wp-content/uploads/2023/05/featured-gold-watches.jpg');"></div>
         <h1>Eternal Timepiece</h1>
-        <p>Discover the pinnacle of luxury and precision engineering in our timeless watches.</p>
-        <a href="#features" class="cta">Explore More</a>
+        <p>Indulge in the epitome of luxury with our exquisite collection of timeless watches.</p>
+        <a href="#collections" class="cta">Discover Our Collections</a>
     </section>
 
-    <section id="features">
-        <div class="background" style="background-image: url('https://cdn.prod.website-files.com/603f5d1df4ee236b69719ff2/6744b38c112bca126f2ad5c4_ar_watch_try-on.webp');"></div>
-        <h2>Unmatched Craftsmanship</h2>
-        <p>Each watch is handcrafted with the finest materials, ensuring elegance and durability that inspires confidence.</p>
-        <a href="#about" class="cta">Learn About Our Process</a>
+    <section id="collections">
+        <div class="background" style="background-image: url('https://thumbs.dreamstime.com/b/ultra-realistic-ad-luxury-gold-wristwatch-intricate-dial-details-metallic-strap-elegant-design-high-definition-358726211.jpg');"></div>
+        <h2>Our Collections</h2>
+        <p>Swipe to explore our premium watches.</p>
+        <div class="carousel">
+            <div class="product-card">
+                <img src="https://globalboutique.com/wp-content/uploads/2023/05/featured-gold-watches.jpg" alt="Gold Majesty" class="product-img">
+                <h3>Gold Majesty</h3>
+                <p>$5,000</p>
+                <a href="#product1" class="cta">View Details</a>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/S/aplus-media-library-service-media/fb4c90e8-14b6-43a7-81e7-17c2fa9bd3eb.__CR0,0,600,450_PT0_SX600_V1___.jpg" alt="Silver Elegance" class="product-img">
+                <h3>Silver Elegance</h3>
+                <p>$4,000</p>
+                <a href="#product2" class="cta">View Details</a>
+            </div>
+            <div class="product-card">
+                <img src="https://leondiamond.com/cdn/shop/articles/Guide_to_Diamond-Encrusted_Watches_f4713b8c-914e-4abc-a793-5c2c62f438fe.jpg?v=1760973137&width=1100" alt="Diamond Supreme" class="product-img">
+                <h3>Diamond Supreme</h3>
+                <p>$10,000</p>
+                <a href="#product3" class="cta">View Details</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="product1">
+        <div class="background" style="background-image: url('https://thumbs.dreamstime.com/b/high-resolution-ultra-realistic-image-gold-wristwatch-resting-smooth-marble-surface-bathed-soft-golden-hour-lighting-368103446.jpg');"></div>
+        <div class="product-detail">
+            <h2>Gold Majesty</h2>
+            <img src="https://globalboutique.com/wp-content/uploads/2023/05/featured-gold-watches.jpg" alt="Gold Majesty" class="product-img">
+            <p>Crafted from 18k gold with precision Swiss movement. A symbol of opulence.</p>
+            <p>Price: $5,000</p>
+            <button class="cta add-to-cart" data-name="Gold Majesty" data-price="5000">Add to Cart</button>
+        </div>
+    </section>
+
+    <section id="product2">
+        <div class="background" style="background-image: url('http://www.watchpilot.com/cdn/shop/articles/Choosing_Silver_Watches_for_Men_Style_and_Substance_in_Timekeeping_210bf220-84d8-48f1-84cd-7755167d9af5_1200x1200.jpg?v=1742225217');"></div>
+        <div class="product-detail">
+            <h2>Silver Elegance</h2>
+            <img src="https://m.media-amazon.com/images/S/aplus-media-library-service-media/fb4c90e8-14b6-43a7-81e7-17c2fa9bd3eb.__CR0,0,600,450_PT0_SX600_V1___.jpg" alt="Silver Elegance" class="product-img">
+            <p>Sterling silver case with sapphire crystal. Elegant and timeless design.</p>
+            <p>Price: $4,000</p>
+            <button class="cta add-to-cart" data-name="Silver Elegance" data-price="4000">Add to Cart</button>
+        </div>
+    </section>
+
+    <section id="product3">
+        <div class="background" style="background-image: url('https://aventuramall.com/wp-content/uploads/2024/05/rolex-gmtmaster-e1716482259353.jpg');"></div>
+        <div class="product-detail">
+            <h2>Diamond Supreme</h2>
+            <img src="https://leondiamond.com/cdn/shop/articles/Guide_to_Diamond-Encrusted_Watches_f4713b8c-914e-4abc-a793-5c2c62f438fe.jpg?v=1760973137&width=1100" alt="Diamond Supreme" class="product-img">
+            <p>Diamond-encrusted bezel with automatic movement. The pinnacle of luxury.</p>
+            <p>Price: $10,000</p>
+            <button class="cta add-to-cart" data-name="Diamond Supreme" data-price="10000">Add to Cart</button>
+        </div>
     </section>
 
     <section id="about">
-        <div class="background" style="background-image: url('https://tdf-asia.com/wp-content/uploads/2020/07/Feature-Images_TDF_Visual-Merchandising-Storytelling-Manufacturing-Specialist_Rolex_Luxury-Watch-Shop-Window-Displays.jpg');"></div>
-        <h2>Our Legacy</h2>
-        <p>Rooted in tradition yet inspired by the future, Eternal Timepiece redefines luxury for the modern connoisseur.</p>
-        <a href="#hero" class="cta">Back to Top</a>
+        <div class="background" style="background-image: url('https://m.media-amazon.com/images/I/51LfMyA0tsL._AC_UY1000_.jpg');"></div>
+        <h2>About Us</h2>
+        <p>Eternal Timepiece is dedicated to crafting watches that transcend time, blending tradition with innovation.</p>
+        <a href="#contact" class="cta">Get in Touch</a>
+    </section>
+
+    <section id="craftsmanship">
+        <div class="background" style="background-image: url('http://reneedeparisjewelry.com/cdn/shop/articles/Bust_Down_Rolex_Watch.png?v=1753642070&width=2048');"></div>
+        <h2>Our Craftsmanship</h2>
+        <p>Each piece is meticulously hand-assembled by master artisans using the finest materials.</p>
+        <a href="#collections" class="cta">See Our Work</a>
+    </section>
+
+    <section id="testimonials">
+        <div class="background" style="background-image: url('https://thumbs.dreamstime.com/b/ultra-realistic-ad-luxury-gold-wristwatch-intricate-dial-details-metallic-strap-elegant-design-high-definition-358726211.jpg');"></div>
+        <h2>Testimonials</h2>
+        <p>"An unparalleled experience in luxury." - Satisfied Customer</p>
+        <p>"Timeless elegance on my wrist." - Another Client</p>
+    </section>
+
+    <section id="blog">
+        <div class="background" style="background-image: url('https://globalboutique.com/wp-content/uploads/2023/05/featured-gold-watches.jpg');"></div>
+        <h2>Blog</h2>
+        <p>Stay updated with the latest in luxury watchmaking.</p>
+        <a href="#" class="cta">Read Latest Posts</a>
+    </section>
+
+    <section id="contact">
+        <div class="background" style="background-image: url('https://thumbs.dreamstime.com/b/high-resolution-ultra-realistic-image-gold-wristwatch-resting-smooth-marble-surface-bathed-soft-golden-hour-lighting-368103446.jpg');"></div>
+        <h2>Contact Us</h2>
+        <p>Email: info@eternaltimepiece.com</p>
+        <p>Phone: +1-800-LUX-WATCH</p>
+        <a href="#hero" class="cta">Back to Home</a>
+    </section>
+
+    <section id="cart">
+        <div class="background" style="background-image: url('https://m.media-amazon.com/images/S/aplus-media-library-service-media/fb4c90e8-14b6-43a7-81e7-17c2fa9bd3eb.__CR0,0,600,450_PT0_SX600_V1___.jpg');"></div>
+        <h2>Shopping Cart</h2>
+        <ul id="cart-items"></ul>
+        <p id="total">Total: $0</p>
+        <a href="#checkout" class="cta">Proceed to Checkout</a>
+    </section>
+
+    <section id="checkout">
+        <div class="background" style="background-image: url('https://leondiamond.com/cdn/shop/articles/Guide_to_Diamond-Encrusted_Watches_f4713b8c-914e-4abc-a793-5c2c62f438fe.jpg?v=1760973137&width=1100');"></div>
+        <h2>Checkout</h2>
+        <p>Enter your details to complete the purchase.</p>
+        <form>
+            <input type="text" placeholder="Name" style="margin: 10px; padding: 10px;">
+            <input type="email" placeholder="Email" style="margin: 10px; padding: 10px;">
+            <button type="button" class="cta">Purchase</button>
+        </form>
     </section>
 
     <script>
-        // Simple scroll animation trigger using Intersection Observer
+        // Animation observer
         const sections = document.querySelectorAll('section');
-
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -142,10 +336,37 @@
                 }
             });
         }, { threshold: 0.5 });
+        sections.forEach(section => observer.observe(section));
 
-        sections.forEach(section => {
-            observer.observe(section);
+        // Shopping Cart Functionality
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItems = document.getElementById('cart-items');
+        const totalEl = document.getElementById('total');
+
+        function updateCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - $${item.price}`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+            totalEl.textContent = `Total: $${total}`;
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const name = button.dataset.name;
+                const price = parseInt(button.dataset.price);
+                cart.push({ name, price });
+                updateCart();
+                alert(`${name} added to cart!`);
+            });
         });
+
+        updateCart();
     </script>
 </body>
 </html>
