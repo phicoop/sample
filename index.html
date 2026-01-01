@@ -1,3 +1,4 @@
+<!-- ROTE PUNKTE:-----------------
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -185,5 +186,183 @@
             }
         });
     </script>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Studio - Inspired by Anton & Irene</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 30px;
+      z-index: 100;
+      mix-blend-mode: difference;
+      color: #fff;
+    }
+    header h1 {
+      font-size: 24px;
+      font-weight: 300;
+    }
+    .section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.1);
+      opacity: 0.8;
+      transition: opacity 0.5s;
+    }
+    .project-overlay {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 40px;
+      max-width: 800px;
+    }
+    .project-overlay h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .project-overlay h2 span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(50px) rotate(-5deg);
+    }
+    .project-overlay p {
+      font-size: 20px;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    .section:nth-child(odd) .project-img {
+      mix-blend-mode: screen; /* For overlapping fade effects */
+    }
+    footer {
+      padding: 100px 40px;
+      text-align: center;
+      font-size: 18px;
+    }
+    @media (max-width: 768px) {
+      .project-overlay h2 { font-size: 36px; }
+      .project-overlay p { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>My Studio</h1>
+  </header>
+
+  <!-- Project 1 -->
+  <section class="section">
+    <img src="https://via.placeholder.com/1920x1080/222/fff?text=Project+1" alt="Project 1" class="project-img">
+    <div class="project-overlay">
+      <h2><span>P</span><span>r</span><span>o</span><span>j</span><span>e</span><span>c</span><span>t</span> <span>O</span><span>n</span><span>e</span></h2>
+      <p>A bold exploration of data visualization highlighting important social issues.</p>
+    </div>
+  </section>
+
+  <!-- Project 2 -->
+  <section class="section">
+    <img src="https://via.placeholder.com/1920x1080/333/fff?text=Project+2" alt="Project 2" class="project-img">
+    <div class="project-overlay">
+      <h2><span>P</span><span>r</span><span>o</span><span>j</span><span>e</span><span>c</span><span>t</span> <span>T</span><span>w</span><span>o</span></h2>
+      <p>Digital redesign for a world-class cultural institution.</p>
+    </div>
+  </section>
+
+  <!-- Project 3 -->
+  <section class="section">
+    <img src="https://via.placeholder.com/1920x1080/444/fff?text=Project+3" alt="Project 3" class="project-img">
+    <div class="project-overlay">
+      <h2><span>P</span><span>r</span><span>o</span><span>j</span><span>e</span><span>c</span><span>t</span> <span>T</span><span>h</span><span>r</span><span>e</span><span>e</span></h2>
+      <p>Building scalable design systems for global platforms.</p>
+    </div>
+  </section>
+
+  <!-- Add more sections as needed -->
+
+  <footer>
+    <p>Inspired by Anton & Irene © 2026</p>
+    <p>Contact: hello@yourstudio.com</p>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Parallax scale and opacity fade on images for gentle overlap
+    document.querySelectorAll('.section').forEach(section => {
+      const img = section.querySelector('.project-img');
+      gsap.to(img, {
+        scale: 1,
+        opacity: 1,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    });
+
+    // Staggered letter-by-letter animation for h2, plus p slide-up
+    document.querySelectorAll('.project-overlay').forEach(overlay => {
+      const letters = overlay.querySelectorAll('h2 span');
+      const p = overlay.querySelector('p');
+
+      gsap.to(letters, {
+        opacity: 1,
+        y: 0,
+        rotation: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.05, // Gradual reveal for delight
+        scrollTrigger: {
+          trigger: overlay,
+          start: "top 70%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      gsap.to(p, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        delay: 0.3, // After letters for sequential life-bringing
+        scrollTrigger: {
+          trigger: overlay,
+          start: "top 70%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+  </script>
 </body>
 </html>
