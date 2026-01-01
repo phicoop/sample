@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eternal Timepiece - Luxury Watches</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         * {
             margin: 0;
@@ -19,6 +20,23 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
             scroll-snap-type: y mandatory;
+            padding-top: 70px; /* Space for fixed header */
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            text-align: center;
+            z-index: 11;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
         }
 
         section {
@@ -108,7 +126,15 @@
         nav a {
             color: #fff;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
         }
 
         /* Carousel for Collections */
@@ -187,20 +213,30 @@
             .carousel {
                 flex: 0 0 100%;
             }
+            nav a {
+                font-size: 0.6rem;
+            }
+            nav i {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <header>
+        <img src="https://static.vecteezy.com/system/resources/previews/032/936/936/non_2x/elegance-in-gold-luxury-watch-for-success-free-photo.jpg" alt="Eternal Timepiece Logo" class="logo">
+    </header>
+
     <nav>
-        <a href="#hero">Home</a>
-        <a href="#collections">Collections</a>
-        <a href="#about">About</a>
-        <a href="#craftsmanship">Craft</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#blog">Blog</a>
-        <a href="#contact">Contact</a>
-        <a href="#cart">Cart</a>
-        <a href="#checkout">Checkout</a>
+        <a href="#hero"><i class="fa-solid fa-home"></i>Home</a>
+        <a href="#collections"><i class="fa-solid fa-box-open"></i>Collections</a>
+        <a href="#about"><i class="fa-solid fa-info-circle"></i>About</a>
+        <a href="#craftsmanship"><i class="fa-solid fa-hammer"></i>Craft</a>
+        <a href="#testimonials"><i class="fa-solid fa-quote-left"></i>Testimonials</a>
+        <a href="#blog"><i class="fa-solid fa-newspaper"></i>Blog</a>
+        <a href="#contact"><i class="fa-solid fa-envelope"></i>Contact</a>
+        <a href="#cart"><i class="fa-solid fa-shopping-cart"></i>Cart</a>
+        <a href="#checkout"><i class="fa-solid fa-credit-card"></i>Checkout</a>
     </nav>
 
     <section id="hero">
